@@ -1,96 +1,18 @@
 # 拾图 · ImageTagManager
 
-**版本 0.1 · Windows x64 · 完全离线**
+完全离线的 Windows 图片标签管理工具。每个版本独立放在对应文件夹中，历史版本保留。
 
-[中文](README.md) | [English](README.en.md)
+当前发布：[v0.2 程序下载与中英文更新说明](https://github.com/2601079750/ImageTagManager/releases/tag/v0.2)。完整解压 ZIP 后运行主文件夹中的 `ImageTagManager.exe`，无需安装 Python。GitHub 仓库保存源码和文档，EXE 与程序压缩包从 Releases 下载。
 
-完全离线的 Windows 图片标签管理工具。第一版基于 Python、Tkinter、Pillow 和 SQLite，原图文件不写入标签信息。
+- **V0.2**：当前迭代，新增统一设置界面、三种主题、清晰的标签选中配色、平滑悬停动画、圆角卡片和完整标签/类别管理。使用说明见 [中文](V0.2/README.md) / [English](V0.2/README.en.md)。
+- **V0.1**：原版归档，保留源码、构建产物和原始发布压缩包。
 
-## 使用
+运行新版：完整解压 `V0.2/release/ImageTagManager-0.2-Windows-x64.zip`，运行其中的 `ImageTagManager.exe`；也可直接运行 `V0.2/ImageTagManager.exe`。V0.2 采用原创二次元图标，EXE 直接放在版本目录下。
 
-从本仓库的 **Releases** 页面下载 `ImageTagManager-0.1-Windows-x64.zip`，先完整解压，再双击主文件夹中的 `ImageTagManager.exe`，不需要安装 Python。应用界面目前为简体中文；本文档另提供英文版。
+后续版本均新建 `V<版本号>` 目录，复制上一版本的源码和文档后迭代，构建及发布包写入新版本目录。已归档版本不作修改。不要复制真实图片库、标签数据库和测试缓存到发布包。
 
-本仓库保存源码与文档，Release 压缩包另外包含 EXE。自行构建后的程序位于 `dist/ImageTagManager.exe`。源码运行需要 Python 3.12 或更新版本：
+程序的标签数据库位于 `%LOCALAPPDATA%\ImageTagManager`，独立于版本目录；归档程序文件不等于备份个人图库。V0.2 可以继续读取 V0.1 的标签库；使用新版删除分类后，重新运行 V0.1 可能重新补入默认分类。
 
-```powershell
-python -m pip install -r requirements.txt
-python main.py
-```
+Offline Windows image tag manager. Each version has its own `V<version>` folder. Keep archived versions unchanged; build and package new versions inside their own folders. Application data is stored separately from version folders.
 
-默认图片库：Windows 系统“图片”文件夹下的 `ImageTagManager 图片库`。通过系统 API 获取“图片”的实际位置，兼容系统文件夹重定向。标签数据库、缩略图缓存和日志默认位于 `%LOCALAPPDATA%\ImageTagManager`，EXE 放在哪里不会影响这些数据。程序没有联网功能。
-
-## 快速上手
-
-1. 点击右上角“导入图片 / 文件夹”，默认“复制到图片库”；也可以选择移动或引用原位置。
-2. 选择图片，或连续添加多个文件夹后点击“导入”。等待后台扫描完成。
-3. 单击缩略图选择图片；按住 Ctrl / Shift 多选。在右侧选择分组并创建标签，或选择已有标签后点击“添加所选标签”。
-4. 在左侧勾选多个标签，并选择“交集”或“并集”；用上方搜索框和排序进一步查找。
-5. 双击图片打开大图预览；定期通过“备份 / 恢复”导出标签数据，并单独保管原图。
-
-## 导入与浏览
-
-- 点击“导入图片 / 文件夹”，选择复制、移动或保留原位置。默认复制，可连续添加多个文件夹或一次选择多张图片。文件夹默认递归扫描。
-- 复制保留原文件；移动先复制、校验内容、保存记录，再删除源图片。不会删除源文件夹或非图片文件。已存在的同名目标文件不会被覆盖。
-- 复制文件夹时，在图片库保留其子目录结构；目录重名会生成新目录。相同内容的多张文件允许同时管理，第一版没有重复图片管理功能。
-- 支持 JPG/JPEG、PNG、WebP、GIF、BMP、TIFF、AVIF（损坏、无法解码或尺寸超过解码器安全限制的文件会报告错误并跳过）。TIFF 为首页预览；GIF、动态 WebP、APNG 等可显示动图角标并在悬停时播放。
-- 缩略图悬停轻微放大；双击或按 Enter / 空格进入大图预览。滚轮缩放，拖动平移；支持适应窗口、1:1、上一张、下一张以及播放/暂停动图。
-- 单击选择；Ctrl 多选、Shift 连选、Ctrl+A 选择当前结果中的全部图片。右侧可打开图片所在位置。
-
-## 标签与查找
-
-- 初始分组为画师、角色、场景、其他。分组可以创建、重命名；每张图片无需填写所有分组，同一组可有多个标签。
-- 在右侧选中已有标签后添加/移除，支持批量操作；也可以选择分组并创建标签。相同分组内重名会复用已有标签。
-- “仅为选中图片更换标签”只替换这些图片上的关联，不修改其他图片；“标签管理”中的重命名则影响所有使用该标签的图片。
-- 左侧标签点击可多选；全局交集要求全部满足，并集要求任意满足。空标签筛选表示不过滤。
-- 搜索框旁可选择全部、文件名或标签，采用不区分大小写的包含匹配。可与标签筛选叠加。
-- 支持按文件名、修改时间、图片分辨率、文件大小、导入时间升序或降序排列。分辨率按像素总数（宽 × 高）比较，文件大小按字节数比较。
-- “未打标签”和“原图缺失”提供快捷筛选。
-
-## 自动同步与路径恢复
-
-程序启动检查来源文件夹；运行期间默认每 15 秒检查一次，也可手动“重新扫描”。首次导入会生成 SHA-256 内容指纹与缩略图；后续根据路径、字节数、修改时间决定是否需要重新读取文件。后台串行处理导入/扫描，缩略图按可见区域加载。
-
-1. 在已管理的目录中改名或移动：扫描发现唯一的内容匹配时，自动恢复关联并保留标签。
-2. 整个引用文件夹搬家：“来源与路径恢复” → 选择原目录 → “重新定位所选文件夹”。新目录会作为后续扫描来源；原目录仍有未恢复记录时会保留原来源。
-3. 零散图片搬到其他目录：“在指定目录查找丢失图片”。只查找你指定的范围，不扫描整台电脑。发现多个候选时需手动选择。
-4. 内容被修改或无法匹配：选中原记录 → “重新关联原图”，可以明确允许内容不同的新文件继承旧标签。
-
-图片暂时缺失时，标签与已有缩略图保留，大图需要原文件才能打开。图片库的默认位置固定；为搬走的图片库恢复关联时，新位置会作为引用来源，之后的复制/移动导入仍写入默认图片库。
-
-## 备份与恢复
-
-“备份 / 恢复”导出 JSON，包含图片记录、原路径、内容指纹、分组、标签及关联，不包含原图或缩略图。请单独保管原图。
-
-恢复会替换当前标签库；程序先校验备份结构及关联完整性，再自动在数据目录 `backups` 下保存恢复前的数据。恢复后标签立即可用，图片已搬家则按上述步骤恢复关联；点击重新扫描可为仍存在的图片重建缓存。不会因恢复备份自动移动、删除或覆盖原图。
-
-## 开发与打包
-
-```powershell
-python -m pip install -r requirements-build.txt
-python -m unittest discover -s tests -p test_core.py -v
-python tests/smoke_ui.py
-.\build.ps1
-python tools/package_release.py
-```
-
-`build.ps1` 先执行核心与界面测试，再生成一个包含解释器与依赖的 Windows EXE。构建时需要依赖包，生成的程序离线运行。单文件版每次启动会先在系统临时目录释放运行组件。
-
-`tools/package_release.py` 将主文件夹所需内容与 EXE 打包到 `release` 目录，排除构建缓存和测试生成数据，并生成 SHA-256 校验文件。
-
-测试仅使用临时生成的图片，覆盖复制/移动异常、后台扫描、批量标签、交并集、路径恢复、多候选、备份恢复和原生界面流程。`tools/preview_fixture.py` 可打开隔离的演示图库，数据仅写入项目 `.test-output/visual`。
-
-测试或多图库隔离运行可指定：
-
-```powershell
-python main.py --data-dir .test-output\data --library-dir .test-output\library --no-startup-scan
-```
-
-第一版范围不包含标签合并、重复图片识别、联网抓取、AI 自动标签、云同步和复杂分组逻辑表达式。
-
-## 反馈
-
-请在本仓库 Issues 中提交问题或建议，附上版本号、复现步骤、预期与实际结果。需要提供图片或日志时，请先移除不希望公开的内容。
-
-## 版本与许可
-
-当前版本：0.1。功能与已知限制见本文，验证范围见 [TEST_REPORT.md](TEST_REPORT.md)。本版本尚未指定源码许可协议；如需再分发或将源码用于其他项目，请先联系仓库作者确认授权。
+Download the Windows app and read the bilingual changelog on the [v0.2 release page](https://github.com/2601079750/ImageTagManager/releases/tag/v0.2). Extract the entire ZIP and run `ImageTagManager.exe` from its main folder; Python is not required. Read the [English guide](V0.2/README.en.md) for features, usage and build instructions. The repository stores source and documentation; executable downloads are provided through Releases.
