@@ -7,3 +7,13 @@ dist/
 *.spec
 release/
 *.zip
+CHAT_WORK_LOG.md
+**/portable.json
+**/portable.json.tmp
+**/data/
+**/rollback/
+**/ImageTagManager.exe
+**/*.sqlite3
+**/*.sqlite3-wal
+**/*.sqlite3-shm
+**/*.log
