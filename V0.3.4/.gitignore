@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+.test-output/
+*.spec
+release/
+*.zip
+/ImageTagManager.exe
+/portable.json
+/portable.json.tmp
+/data/
+/rollback/
+*.update.exe
