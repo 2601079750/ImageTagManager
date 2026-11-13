@@ -1,0 +1,23 @@
+拾图 · ImageTagManager v0.3.4
+
+安装前请退出拾图，包括系统托盘中的实例。
+
+首次安装：默认只为当前用户安装，无需管理员权限，可自行选择安装目录。首次启动时请选择独立的图片库；应用数据默认保存在程序旁的 data 文件夹。
+
+已有用户升级：请先备份，在原程序目录覆盖安装，以沿用 portable.json、data 和图片库设置。若将安装版安装到其他目录，它不会自动连接另一个解压版的数据。不要把空的 data 或 portable.json 覆盖到旧程序目录。
+
+安装程序仅更新程序及说明，不打包、不覆盖用户数据库、配置或图片。卸载保留用户生成的数据、定位配置、备份及原图。完成卸载后，这些文件可能仍留在原目录。
+
+图库管理可完全离线使用；联网更新为可选功能。此版本的 GitHub 更新检查仍可能受接口限流影响，可从 Releases 页面手动下载。
+
+English
+
+Exit Shitu, including its tray instance, before installing.
+
+Installation is per-user and does not require administrator privileges. You can choose the installation folder. First launch asks for a separate image library; application data defaults to the adjacent data folder.
+
+Existing users: back up first, then install into the same application folder to retain portable.json, data and library settings. A different installation folder does not automatically attach another portable copy's catalogue. Never replace existing user data or configuration with empty files.
+
+Setup installs only the program and documentation. User databases, configuration, backups and original images are not included or overwritten. Uninstall retains runtime user files, so the installation folder may remain afterward.
+
+Collection management works offline. Optional GitHub update checks may still encounter API rate limits in this release; manual downloads are available from Releases.
